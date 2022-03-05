@@ -1,0 +1,31 @@
+from math import *
+
+if __name__ == "__main__":
+  lines = ['SA', 'J3 0, 0, 1']
+  y_lim = 3.5
+  x_lim = 8.5
+  bit_size = 0.5
+  max_depth = 0.25
+  material_top = 0.6
+  x_cur = 0
+  y_cur = 0
+  n_x = int(x_lim / bit_size) + 1
+  n_y = int(y_lim / bit_size) + 1
+  for x_cur in range(0, n_x):
+    for y_cur in range(0, n_y):
+      x = x_cur * bit_size
+      y = y_cur * bit_size
+      if x_cur % 2 == 0:
+        y -= bit_size * 0.5
+      y_up = y + 0.5 * bit_size
+      center = (x_lim / 2., y_lim / 2.)
+      x_modifier = exp(-0.5 * (x - center[0])**2 / (x_lim / 4.)**2)
+      y_modifier = exp(-0.5 * (y - center[1])**2 / (y_lim / 4.)**2)
+      modifier = x_modifier * y_modifier
+      plunge = material_top - max_depth * modifier
+      lines.append(f'M3 {x} {y} {plunge}')
+      lines.append(f'M3 {x} {y_up} {material_top}')
+  lines.append('J3 0, 0, 1')
+
+  with open('armor.gcode', 'w') as f:
+    f.write('\n'.join(lines))
