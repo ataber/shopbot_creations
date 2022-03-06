@@ -30,8 +30,8 @@ if __name__ == "__main__":
   y_lim = 8.5
   x_lim = 3.5
   bit_size = 0.5
-  max_depth = 0.25
-  material_top = 0.6
+  max_depth = 0.125
+  material_top = 0.3125
 
   x_step_size = bit_size
   n_x = int(x_lim / x_step_size) + 1
@@ -48,7 +48,6 @@ if __name__ == "__main__":
       x_modifier = exp(-0.5 * (x - center[0])**2 / (x_lim / 4.)**2)
       y_modifier = exp(-0.5 * (y - center[1])**2 / (y_lim / 4.)**2)
       modifier = x_modifier * y_modifier
-      # modifier = 1
       plunge = material_top - max_depth * modifier
 
       y_next = y + y_step_size
