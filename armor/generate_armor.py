@@ -27,6 +27,9 @@ if __name__ == "__main__":
       plunge = material_top - max_depth * modifier
       lines.append(f'M3 {x} {y} {plunge}')
       lines.append(f'M3 {x} {y_up} {material_top}')
+      if y_cur == n_y - 1:
+        lines.append(f'M3 {x}, {y_up}, 1')
+        lines.append(f'J3 {x + x_step_size}, 0.0, 1')
   lines.append('J3 0, 0, 1')
 
   with open('armor.gcode', 'w') as f:
