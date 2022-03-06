@@ -2,19 +2,21 @@ from math import *
 
 if __name__ == "__main__":
   lines = ['SA', 'J3 0, 0, 1']
-  y_lim = 3.5
-  x_lim = 8.5
+  y_lim = 8.5
+  x_lim = 3.5
   bit_size = 0.5
   max_depth = 0.25
   material_top = 0.6
   x_cur = 0
   y_cur = 0
-  n_x = int(x_lim / bit_size) + 1
-  n_y = int(y_lim / bit_size) + 1
+  x_step_size = bit_size
+  n_x = int(x_lim / x_step_size) + 1
+  y_step_size = bit_size * 2
+  n_y = int(y_lim / y_step_size) + 1
   for x_cur in range(0, n_x):
     for y_cur in range(0, n_y):
-      x = x_cur * bit_size
-      y = y_cur * bit_size
+      x = x_cur * x_step_size
+      y = y_cur * y_step_size
       if x_cur % 2 == 0:
         y -= bit_size * 0.5
       y_up = y + 0.5 * bit_size
