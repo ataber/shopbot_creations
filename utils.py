@@ -50,11 +50,11 @@ def make_multiple_passes(line, depth_per_pass=0.0625):
   if max_depth < depth_per_pass:
     max_depth = depth_per_pass
 
-  n_passes = ceil(max_depth / depth_per_pass)
+  n_passes = int(ceil(max_depth / depth_per_pass))
   passes = []
   for p in range(n_passes):
     depth_multiplier = (p + 1) * (depth_per_pass / max_depth)
-    assert depth_multiplier <= 1
+    depth_multiplier = max(depth_multiplier, 1)
     plunge_pass = [[p[0], p[1], p[2] * depth_multiplier for p in line]]
     passes += plunge_pass
 
